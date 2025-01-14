@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -13,12 +14,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,16 +49,196 @@ fun StatsScreen() {
             .fillMaxSize()
             .background(color = Theme().background)
             .verticalScroll(rememberScrollState())
+            .padding(bottom = 100.dp, top = 50.dp)
 
         //.background(color = Color.White)
     ) {
-        ClosureStats()
+
+        var numberInput by remember { mutableStateOf("") }
+
+//        NumericInputField(
+//            value = numberInput,
+//            onValueChange = { newInput -> numberInput = newInput }
+//        )
+//
+//        Row(modifier = Modifier
+//            .fillMaxWidth()
+//            .height(70.dp)
+//            .background(color = Color.Magenta)
+//        ){
+//
+//        }
+        Inputs()
         ScoreTab()
+
+        ClosureStats()
+
         AverageTab()
     }
-    NavigationBar()
+    //NavigationBar()
 }
 
+@Composable
+fun Inputs(){
+    Column(modifier=Modifier
+        .fillMaxWidth()
+        .background(color = Theme().background)
+    ){
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .height(height = 50.dp)
+            .border(width = 1.dp, color = Theme().onBackground)
+            .background(color = Theme().background)
+        ){
+            Column(
+                modifier = Modifier
+                    .weight(2f)
+                    .fillMaxHeight()
+                    .border(width = 1.dp, color = Theme().onBackground)
+                    .background(color = Theme().background),
+                Arrangement.Center
+            ) {
+                Text(
+                    text = "Nome",
+                    fontSize = 30.sp,
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                )
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .border(width = 1.dp, color = Theme().onBackground)
+                    .background(color = Theme().background),
+                Arrangement.Center
+            ) {
+                Text(
+                    text = "3-5",
+                    fontSize = 30.sp,
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                )
+            }
+            Column(
+                modifier = Modifier
+                    .weight(2f)
+                    .fillMaxHeight()
+                    .border(width = 1.dp, color = Theme().onBackground)
+                    .background(color = Theme().background),
+                Arrangement.Center
+            ) {
+                Text(
+                    text = "Nome",
+                    fontSize = 30.sp,
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                )
+            }
+
+        }
+
+
+        for(i in 1..3){
+            Row(modifier = Modifier,
+                Arrangement.Center
+
+            ) {
+                var numberInput1 by remember { mutableStateOf("") }
+                var numberInput2 by remember { mutableStateOf("") }
+
+                Row(
+                    modifier = Modifier
+                        .weight(2f)
+                        .align(Alignment.CenterVertically),
+                    Arrangement.Center
+                ) {
+                    NumericInputField(
+                        value = numberInput1,
+                        onValueChange = { newInput -> numberInput1 = newInput }
+                    )
+                }
+
+                Row(
+                    modifier = Modifier
+                        .weight(1f)
+                        .align(Alignment.CenterVertically),
+                    Arrangement.Center
+                ) {
+                    Text(text = i.toString(), fontSize = 30.sp)
+                }
+
+
+                Row(modifier = Modifier
+                    .weight(2f)) {
+                NumericInputField(
+                    value = numberInput2,
+                    onValueChange = { newInput -> numberInput2 = newInput }
+                )
+            }
+
+            }
+        }
+
+
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .height(height = 50.dp)
+            //.border(width = 1.dp, color = Theme().onBackground)
+            .background(color = Theme().background)
+        ){
+            Column(
+                modifier = Modifier
+                    .weight(2f)
+                    .fillMaxHeight()
+                    //.border(width = 1.dp, color = Theme().onBackground)
+                    .background(color = Theme().background),
+                Arrangement.Center
+            ) {
+                Button(
+                    onClick = {/*TODO*/},
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .padding(5.dp)
+                ) {
+                    Text(text = "Go")
+                }
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    //.border(width = 1.dp, color = Theme().onBackground)
+                    .background(color = Theme().background),
+                Arrangement.Center
+            ) {
+
+            }
+            Column(
+                modifier = Modifier
+                    .weight(2f)
+                    .fillMaxHeight()
+                    //.border(width = 1.dp, color = Theme().onBackground)
+                    .background(color = Theme().background),
+                Arrangement.Center
+            ) {
+                Button(
+                    onClick = {/*TODO*/},
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .padding(5.dp)
+                ) {
+                    Text(text = "bo")
+                }
+            }
+
+        }
+
+
+    }
+}
 
 @Composable
 fun RowScore() {
@@ -558,4 +748,31 @@ fun ClosureBar(category: String, stat1: Int, stat2: Int) {
             )
         }
     }
+
+
+
 }
+
+
+
+@Composable
+fun NumericInputField(
+    value: String,
+    onValueChange: (String) -> Unit
+) {
+    TextField(
+        value = value,
+        onValueChange = { input ->
+            // Allow only digits
+            if (input.all { it.isDigit() }) {
+                onValueChange(input)
+            }
+        },
+        label = { Text("Enter a number") },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Number // Numeric keyboard
+        )
+    )
+}
+
+
