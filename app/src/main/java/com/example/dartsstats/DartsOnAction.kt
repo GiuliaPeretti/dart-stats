@@ -1,9 +1,8 @@
 package com.example.dartsstats
 
-import android.content.Context
 
 open class DartsOnAction {
-    data class UpdateScore(val bo: String): DartsOnAction()
-    data class StartGame(val context: Context) : DartsOnAction()
-    data class SelectTopic(val topic: String, val description: String) : DartsOnAction()
+    data class UpdateScore(val points: List<Int>, val firstPlayer: Boolean): DartsOnAction()
+    data class StartGame(val name1: String, val name2: String, val sets: String, val legs: String): DartsOnAction()
+    object Clear: DartsOnAction()
 }

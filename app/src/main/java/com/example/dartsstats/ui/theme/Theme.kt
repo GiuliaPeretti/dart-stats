@@ -1,6 +1,5 @@
 package com.example.dartsstats.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
@@ -14,19 +13,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
+    primary = Color(0xff077c01),
+    secondary = Color(0xffbf0000),
     tertiary = Pink80,
     background = Color.Black,
-    onBackground = Color.White
+    onBackground = Color.White,
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40,
-    background = Color.White,
-    onBackground = Color.Black
+    primary = Color(0xff077c01),
+    secondary = Color(0xffbf0000),
+    tertiary = Color(0xfff9f5d6),
+    onTertiary = Color(0xFFA4A276),
+    background = Color(0xFFffffff),
+    onBackground = Color.Black,
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
     surface = Color(0xFFFFFBFE),

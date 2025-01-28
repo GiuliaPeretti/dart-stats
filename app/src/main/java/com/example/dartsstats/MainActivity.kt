@@ -4,27 +4,69 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.fadeIn
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.example.dartsstats.ui.theme.Theme
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 class MainActivity : ComponentActivity() {
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            StatsScreen()
+            MainScreen()
         }
     }
+
+    @Composable
+    fun MainScreen() {
+        val navController =     rememberNavController()
+        val viewModel = DartsViewModel()
+
+        NavHost(navController = navController, startDestination = "home") {
+            composable(
+                route="first",
+                enterTransition = { fadeIn(animationSpec = spring(stiffness = Spring.StiffnessHigh)) },
+            ) {
+                StatsScreen(
+                    onAction = viewModel::onAction,
+                    viewModel = viewModel,
+                    navController = navController
+                )
+            }
+            composable(
+                route="home",
+                enterTransition = { fadeIn(animationSpec = spring(stiffness = Spring.StiffnessHigh)) },
+            ) {
+                Home(
+                    onAction = viewModel::onAction,
+                    navController = navController)
+            }
+
+            composable(
+                route="victory",
+                enterTransition = { fadeIn(animationSpec = spring(stiffness = Spring.StiffnessHigh)) },
+            ) {
+                VictoryScreen(viewModel = viewModel,
+                    onAction = viewModel::onAction,
+                    navController = navController)
+            }
+
+
+        }
+
+    }
+
+
+
 }
+
+
 
